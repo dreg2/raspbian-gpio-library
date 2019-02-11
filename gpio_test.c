@@ -32,6 +32,10 @@ int main(void)
 	printf("pin %d out/high %-9.9s  %d\n", pin, fsel_name[gpio_fsel_get(pin)], gpio_level(pin));
 	nanosleep(&delay, NULL);
 
+	gpio_fsel_set((uint8_t)(pin-1), GPIO_FSEL_ALT2);
+	gpio_fsel_set((uint8_t)(pin+1), GPIO_FSEL_ALT3);
+	gpio_fsel_set((uint8_t)(pin+2), GPIO_FSEL_ALT1);
+
 	gpio_fsel_set(pin, GPIO_FSEL_ALT4);
 	printf("pin %d alt4     %-9.9s  %d\n", pin, fsel_name[gpio_fsel_get(pin)], gpio_level(pin));
 

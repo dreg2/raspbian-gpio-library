@@ -76,8 +76,8 @@ uint8_t gpio_fsel_get(uint8_t pin)
 void gpio_fsel_set(uint8_t pin, uint8_t fsel)
 	{
 	__sync_synchronize(); // hardware memory barrier
-	GPIO_REG_FSEL(pin) = (GPIO_REG_FSEL(pin) & ~(GPIO_FSEL_MASK << GPIO_FSEL_SHIFT(pin)))
-					| ((uint32_t)fsel << GPIO_FSEL_SHIFT(pin));
+	GPIO_REG_FSEL(pin) &= (uint32_t)~(GPIO_FSEL_MASK << GPIO_FSEL_SHIFT(pin)); // clear all fsel bits
+	GPIO_REG_FSEL(pin) |= ((uint32_t)fsel << GPIO_FSEL_SHIFT(pin));            // set 1 bits
 	}
 
 //----------------------------------------------------------------------------------------------------
